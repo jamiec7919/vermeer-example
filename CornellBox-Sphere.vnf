@@ -1,0 +1,84 @@
+Globals {
+	XRes 1024
+	YRes 1024
+}
+
+OutputHDR {
+	Filename "CornellBox-Sphere.hdr"
+}
+
+DiskLight {
+	Name "light01"
+	Material "lightmtl"
+	P 0 1.57 0
+	LookAt 0 0 0
+	Up 0 0 1
+	Radius 0.15
+}
+
+Camera {
+    Name "camera"
+	Type "LookAt"
+	Roll 1 1 float 0 
+	From 2 1 point 0 0.85 4 0 0.85 4 
+	# From 1 1 point 0 0.85 4
+	To 1 1 point 0 0.85 -1
+
+    #Radius 0.095  # Try this for some DOF
+    Radius 0.0
+
+    Focal  3.5
+    Fov 35
+	Up 0 1 0
+}
+
+# This model is available at: http://graphics.cs.williams.edu/data/meshes.xml#11
+# Extract the CornellBox-Sphere.obj + .mtl into the models directory.
+Meshfile {
+	Name "mesh01"
+	Filename "models/CornellBox-Sphere.obj"
+}
+
+Material {
+	Name "lightmtl"
+	Diffuse "Lambert"
+	Roughness float 0.1
+	Kd rgb 0.85 0.85 0.85 
+	IOR float 1.5
+	E rgb 100 100 100
+}
+
+Material {
+	Name "rightSphere"
+
+	DiffuseStrength float 0.0
+	SpecularStrength float 1
+	Roughness float 0.5
+	SpecularRoughness float 0.0
+	Kd rgb 0.85 0.8 0.8 
+	IOR float 1.5
+	Ks rgb 0.9 0.9 0.9
+	Kt rgb 0.9 0.9 0.9
+
+	# TransRoughness float 0.5
+	TransStrength float 1
+	TransThin 0
+}
+
+Material {
+	Name "leftSphere"
+
+	Roughness float 0.5
+	SpecularRoughness float 0.2
+	DiffuseStrength float 0
+	SpecularStrength float 1
+	Kd rgb 0.5 0.5 0.5
+	Ks rgb 0.9 0.9 0.9
+	IOR float 1.5
+	TransStrength float 0
+
+
+	Spec1FresnelModel "Metal"
+	Spec1FresnelRefl rgb 0.6 0.6 0.6
+	Spec1FresnelEdge rgb 0.95 0.95 0.95
+}

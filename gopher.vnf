@@ -1,0 +1,115 @@
+# Copyright 2016 The Vermeer Light Tools Authors. All rights reserved.
+# Use of this file is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+Globals {
+	XRes 1024
+	YRes 1024
+}
+
+OutputHDR {
+	Filename "gopher.hdr"
+}
+
+# gopher.obj model licensed under Creative Commons 3.0 Attribution license
+# https://github.com/golang-samples/gopher-3d
+#
+# The Go gopher was designed by Renee French. (http://reneefrench.blogspot.com/) The gopher 3D model was # made by Takuya Ueda (http://u.hinoichi.net).
+Meshfile {
+	Filename "models/gopher.obj"
+	CalcNormals 1
+}
+
+PolyMesh {
+	Verts 1 4 point -100 0.4 -100  -100 0.4 100   100 0.4 100   100 0.4 -100
+	PolyCount 1 int 4
+	FaceIdx 4 int 0 1 2 3
+	UV 1 4 vec2 0 0 1 0 1 1 0 1
+	UVIdx 4 int 0 1 2 3
+	Normals 1 4 vec3 0 1 0 0 1 0 0 1 0 0 1 0 
+	ModelToWorld 1 matrix 1 0 0 0 
+	             0 1 0 0
+	             0 0 1 0 
+	             0 0 0 1
+    Material "mtl_floor"
+    CalcNormals 1
+}
+
+DiskLight {
+	Name "light01"
+	P 0 100 0
+	LookAt 0 0 0
+	Up 0 0 1
+	Radius 50
+	Material "mtl_light01"
+}
+
+DiskLight {
+	Name "light01"
+	P 50 50 50
+	LookAt 0 0 0
+	Up 0 1 0
+	Radius 50
+	Material "mtl_light01"
+}
+
+#DiskLight {
+#	Name "light02"
+#	P 1 1.57 0
+#	LookAt 1 0 1
+#	Up 0 0 1
+#	Radius 0.15
+#	Material "mtl_light01"
+#}
+
+Camera {
+    Name "camera"
+	Type "LookAt"
+    From 1 1 point 15 6 10
+	To 1 1 point 0 2 0
+    Radius 0.0
+    Focal  3.5
+    Fov 35
+    Up 0 1 0
+}
+
+Material {
+	Name "mtl_light01"
+	  E rgb 5 5 5 
+
+	 Roughness float 0.4
+	 SpecularRoughness float 0.2
+	 Kd rgb 0.1 0.1 0.1
+	 IOR float 1.2
+	 Ks rgb 0.8 0.8 0.8
+	
+	
+}
+
+MaterialDebug {
+	Name "mtl_floor_debug"
+	Colour rgb 0.0 0.4 0.0
+}
+
+Material {
+	Name "mtl_floor"
+	DiffuseStrength float 1.0
+	SpecularStrength float 0.0
+	Roughness float 0.9
+	SpecularRoughness float 0.2
+	Kd rgb 0.5 0.5 0.5
+	IOR float 1.2
+		
+}
+
+
+Material {
+	Name "mtl2"
+	 Roughness float 0.3
+	 SpecularRoughness float 0.2
+	 Kd rgbtex "maps\diego_rivera__desnudo_con_alcatraces.jpg"
+	 IOR float 1.2
+	 Ks rgb 0.8 0.8 0.8
+	
+	
+}

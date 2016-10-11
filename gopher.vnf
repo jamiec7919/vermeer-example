@@ -11,46 +11,66 @@ OutputHDR {
 	Filename "gopher.hdr"
 }
 
+AiryFilter {
+	Name "filter1"
+	Width 4
+	Res 61
+}
+
 # gopher.obj model licensed under Creative Commons 3.0 Attribution license
 # https://github.com/golang-samples/gopher-3d
 #
 # The Go gopher was designed by Renee French. (http://reneefrench.blogspot.com/) The gopher 3D model was # made by Takuya Ueda (http://u.hinoichi.net).
-Meshfile {
-	Filename "models/gopher.obj"
-	CalcNormals 1
+Include {
+	Filename "models/gopher.vnf"
 }
 
 PolyMesh {
-	Verts 1 4 point -100 0.4 -100  -100 0.4 100   100 0.4 100   100 0.4 -100
+    Name "Floor"
+	Verts 1 4 point -100 -0.4 -100  -100 -0.4 100   100 -0.4 100   100 -0.4 -100
 	PolyCount 1 int 4
 	FaceIdx 4 int 0 1 2 3
 	UV 1 4 vec2 0 0 1 0 1 1 0 1
 	UVIdx 4 int 0 1 2 3
 	Normals 1 4 vec3 0 1 0 0 1 0 0 1 0 0 1 0 
-	ModelToWorld 1 matrix 1 0 0 0 
+	Transform 1 matrix 1 0 0 0 
 	             0 1 0 0
 	             0 0 1 0 
 	             0 0 0 1
-    Material "mtl_floor"
-    CalcNormals 1
+    Shader "mtl_floor"
 }
 
-DiskLight {
-	Name "light01"
-	P 0 100 0
-	LookAt 0 0 0
-	Up 0 0 1
-	Radius 50
-	Material "mtl_light01"
-}
+#DiskLight {
+#	Name "light01"
+#	P 0 100 0
+#	LookAt 0 0 0
+#	Up 0 0 1
+#	Radius 50
+#	Shader "mtl_light01"
+#}
 
-DiskLight {
+#DiskLight {
+#	Name "light01"
+#	P 50 50 50
+#	LookAt 0 0 0
+#	Up 0 1 0
+#	Radius 50
+#	Shader "mtl_light01"
+#}
+
+#SphereLight {
+#	Name "light01"
+#	P 0 100 0
+#	Radius 50
+#	Shader "mtl_light01"
+#}
+
+SphereLight {
 	Name "light01"
 	P 50 50 50
-	LookAt 0 0 0
-	Up 0 1 0
 	Radius 50
-	Material "mtl_light01"
+	Shader "mtl_light01"
+    Samples 3
 }
 
 #DiskLight {
@@ -66,6 +86,7 @@ Camera {
     Name "camera"
 	Type "LookAt"
     From 1 1 point 15 6 10
+    Roll 1 1 float 0
 	To 1 1 point 0 2 0
     Radius 0.0
     Focal  3.5
@@ -73,43 +94,44 @@ Camera {
     Up 0 1 0
 }
 
-Material {
+ShaderStd {
 	Name "mtl_light01"
-	  E rgb 5 5 5 
+	  EmissionColour rgb 0.5 0.5 0.5
+	  EmissionStrength float 10 
 
-	 Roughness float 0.4
-	 SpecularRoughness float 0.2
-	 Kd rgb 0.1 0.1 0.1
+	 DiffuseRoughness float 0.4
+	 Spec1Roughness float 0.2
+	 DiffuseColour rgb 0.1 0.1 0.1
 	 IOR float 1.2
-	 Ks rgb 0.8 0.8 0.8
+	 Spec1Colour rgb 0.8 0.8 0.8
 	
 	
 }
 
-MaterialDebug {
+DebugShader {
 	Name "mtl_floor_debug"
 	Colour rgb 0.0 0.4 0.0
 }
 
-Material {
+ShaderStd {
 	Name "mtl_floor"
 	DiffuseStrength float 1.0
-	SpecularStrength float 0.0
-	Roughness float 0.9
-	SpecularRoughness float 0.2
-	Kd rgb 0.5 0.5 0.5
+	Spec1Strength float 0.0
+	DiffuseRoughness float 0.9
+	Spec1Roughness float 0.2
+	DiffuseColour rgb 0.5 0.5 0.5
 	IOR float 1.2
 		
 }
 
 
-Material {
+ShaderStd {
 	Name "mtl2"
-	 Roughness float 0.3
-	 SpecularRoughness float 0.2
-	 Kd rgbtex "maps\diego_rivera__desnudo_con_alcatraces.jpg"
+	 DiffuseRoughness float 0.3
+	 Spec1Roughness float 0.2
+	 DiffuseColour rgbtex "maps\diego_rivera__desnudo_con_alcatraces.jpg"
 	 IOR float 1.2
-	 Ks rgb 0.8 0.8 0.8
+	 Spec1Colour rgb 0.8 0.8 0.8
 	
 	
 }

@@ -7,12 +7,16 @@ OutputHDR {
 	Filename "CornellBox-Sphere.hdr"
 }
 
-DiskLight {
+AiryFilter {
+	Name "filter1"
+	Width 4
+	Res 61
+}
+
+SphereLight {
 	Name "light01"
-	Material "lightmtl"
+	Shader "lightmtl"
 	P 0 1.57 0
-	LookAt 0 0 0
-	Up 0 0 1
 	Radius 0.15
 }
 
@@ -34,48 +38,42 @@ Camera {
 
 # This model is available at: http://graphics.cs.williams.edu/data/meshes.xml#11
 # Extract the CornellBox-Sphere.obj + .mtl into the models directory.
-Meshfile {
-	Name "mesh01"
-	Filename "models/CornellBox-Sphere.obj"
+Include {
+	Filename "models/CornellBox-Sphere.vnf"
 }
 
-Material {
+ShaderStd {
 	Name "lightmtl"
-	Diffuse "Lambert"
-	Roughness float 0.1
-	Kd rgb 0.85 0.85 0.85 
+	DiffuseStrength float 1
+	DiffuseRoughness float 0.1
+	DiffuseColour rgb 0.85 0.85 0.85 
 	IOR float 1.5
-	E rgb 100 100 100
+	EmissionColour rgb 0.8 0.8 0.8
+	EmissionStrength float 10
 }
 
-Material {
-	Name "rightSphere"
+ShaderStd {
+	Name "CornellBox-Sphere.obj:rightSphere"
 
 	DiffuseStrength float 0.0
-	SpecularStrength float 1
-	Roughness float 0.5
-	SpecularRoughness float 0.0
-	Kd rgb 0.85 0.8 0.8 
+	Spec1Strength float 1
+	DiffuseRoughness float 0.5
+	Spec1Roughness float 0.0
+	DiffuseColour rgb 0.85 0.8 0.8 
 	IOR float 1.5
-	Ks rgb 0.9 0.9 0.9
-	Kt rgb 0.9 0.9 0.9
-
-	# TransRoughness float 0.5
-	TransStrength float 1
-	TransThin 0
+	Spec1Colour rgb 0.9 0.9 0.9
 }
 
-Material {
-	Name "leftSphere"
+ShaderStd {
+	Name "CornellBox-Sphere.obj:leftSphere"
 
-	Roughness float 0.5
-	SpecularRoughness float 0.2
+	DiffuseRoughness float 0.5
+	Spec1Roughness float 0.2
 	DiffuseStrength float 0
-	SpecularStrength float 1
-	Kd rgb 0.5 0.5 0.5
-	Ks rgb 0.9 0.9 0.9
+	Spec1Strength float 1
+	DiffuseColour rgb 0.5 0.5 0.5
+	Spec1Colour rgb 0.9 0.9 0.9
 	IOR float 1.5
-	TransStrength float 0
 
 
 	Spec1FresnelModel "Metal"

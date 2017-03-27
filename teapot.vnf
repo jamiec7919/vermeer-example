@@ -1,6 +1,7 @@
 Globals {
 	XRes 1024
 	YRes 1024
+	MaxGoRoutines 5
 }
 
 OutputHDR {
@@ -31,18 +32,19 @@ AiryFilter {
 #	Material "mtl_light02"
 #}
 
-SphereLight {
-	Name "light01"
-	P -400 250 390
-	Radius 130
-	Shader "mtl_light01"
-}
+#SphereLight {
+#	Name "light01"
+#	P -400 250 390
+#	Radius 130
+#	Shader "mtl_light01"
+#}
 
 SphereLight {
 	Name "light02"
 	P 0 450 0
 	Radius 230
 	Shader "mtl_light02"
+	Samples 1
 }
 
 Camera {
@@ -54,14 +56,24 @@ Camera {
 	Up 0 1 0
 	Focal 204.75
 	Fov 60
-	Radius 3
+	#Radius 3
+	Radius 0
 }
 
 # This model is available at: http://graphics.cs.williams.edu/data/meshes.xml#7
 # Extract the teapot.obj + .mtl into the models directory.
-#Include {
-#	Filename "models/teapot.vnf"
-#}
+Proc {
+    Name "teapotobj"
+    Handler "wfobj"
+	Data "models/teapot.obj"
+	BMin 1 1 point -72 0 -48
+	BMax 1 1 point 83 80 47
+	Transform 1 matrix 1 0 0 0
+	                   0 1 0 0
+	                   0 0 1 0
+	                   0 0 0 1
+
+}
 
 PolyMesh {
 	Name "floormesh"
@@ -71,7 +83,7 @@ PolyMesh {
 	UV 1 4 vec2 0 0 0 1 1 1 1 0
 	UVIdx 4 int 0 1 2 3
 	Normals 1 4 vec3 0 1 0 0 1 0 0 1 0 0 1 0 
-	Shader "floor"
+	Shader 1 string "floor"
 
 }
 
@@ -117,7 +129,7 @@ ShaderStd {
 }
 
 ShaderStd {
-	Name "teapot.obj:default"
+	Name "teapotobj:default"
 	 IOR float 1.5
 	 Spec1Roughness float 0.4
 	 DiffuseRoughness float 0 # 0.6

@@ -4,12 +4,12 @@
 # http://graphics.cs.williams.edu/data
 
 newmtl default
-  Ns 10.0000
+  Ns 900.0000
   Ni 1.5000
   Tr 0  0
   illum 2
   Ka 1 1 1
   Kd 1 1 1
-  Ks 0.2 0.2 0.2
+  Ks 0.2 0.8 0.2
   Ke 0 0 0
-  map_Kd maps/grunge1.jpg
+  map_Kd maps/test.tga

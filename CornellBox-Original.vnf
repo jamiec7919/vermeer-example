@@ -6,11 +6,7 @@ Globals {
 }
 
 OutputHDR {
-	Filename "CornellBox-Sphere.hdr"
-}
-
-OutputFloat {
-	Filename "test.float"
+	Filename "CornellBox-Original.hdr"
 }
 
 AiryFilter {
@@ -19,36 +15,20 @@ AiryFilter {
 	Res 61
 }
 
-#SphereLight {
+SphereLight {
+	Name "light01"
+	Shader "lightmtl"
+	P 0 1.84 0
+	Radius 0.15
+	Samples 2
+}
+
+#DiskLight {
 #	Name "light01"
 #	Shader "lightmtl"
 #	P 0 1.42 0
-#	Radius 0.15
-#	Samples 2
-#}
-
-#SphereLight {
-#	Name "light01"
-#	Shader "lightmtl"
-#	P 0 1 0
-#	Radius 0.15
-#	Samples 2
-#}
-
-DiskLight {
-	Name "light01"
-	Shader "lightmtl"
-	P 0 1.42 0
-	LookAt 0 0 0 
-	Up 1 0 0 
-	Radius 0.15
-	Samples 1
-}
-
-#SphereLight {
-#	Name "light01"
-#	Shader "lightmtl"
-#	P -0.5 1.42 0
+#	LookAt 0 0 0 
+#	Up 1 0 0 
 #	Radius 0.15
 #	Samples 2
 #}
@@ -70,13 +50,13 @@ Camera {
 }
 
 # This model is available at: http://graphics.cs.williams.edu/data/meshes.xml#11
-# Extract the CornellBox-Sphere.obj + .mtl into the models directory.
+# Extract the CornellBox-Original.obj + .mtl into the models directory.
 Proc {
     Name "cornellbox"
     Handler "wfobj"
-	Data "models/CornellBox-Sphere.obj"
+	Data "models/CornellBox-Original.obj"
 	BMin 1 1 point -1.5 -1.5 -1.5
-	BMax 1 1 point 1.5 1.5 1.5
+	BMax 1 1 point 1.5 2 1.5
 	Transform 1 matrix 1 0 0 0
 	                   0 1 0 0
 	                   0 0 1 0

@@ -20,14 +20,24 @@ AiryFilter {
 # gopher.obj model licensed under Creative Commons 3.0 Attribution license
 # https://github.com/golang-samples/gopher-3d
 #
-# The Go gopher was designed by Renee French. (http://reneefrench.blogspot.com/) The gopher 3D model was # made by Takuya Ueda (http://u.hinoichi.net).
-Include {
-	Filename "models/gopher.vnf"
+# The Go gopher was designed by Renee French. (http://reneefrench.blogspot.com/) The gopher 3D model was 
+# made by Takuya Ueda (http://u.hinoichi.net).
+Proc {
+    Name "gopherobj"
+    Handler "wfobj"
+	Data "models/gopher.obj"
+	BMin 1 1 point -4 0 -2
+	BMax 1 1 point 2 6 3
+	Transform 1 matrix 1 0 0 0
+	                   0 1 0 0
+	                   0 0 1 0
+	                   0 0 0 1
+
 }
 
 PolyMesh {
     Name "Floor"
-	Verts 1 4 point -100 -0.4 -100  -100 -0.4 100   100 -0.4 100   100 -0.4 -100
+	Verts 1 4 point -100 0.37 -100  -100 0.37 100   100 0.37 100   100 0.37 -100
 	PolyCount 1 int 4
 	FaceIdx 4 int 0 1 2 3
 	UV 1 4 vec2 0 0 1 0 1 1 0 1
@@ -37,7 +47,7 @@ PolyMesh {
 	             0 1 0 0
 	             0 0 1 0 
 	             0 0 0 1
-    Shader "mtl_floor"
+    Shader 1 string "mtl_floor"
 }
 
 #DiskLight {
@@ -70,7 +80,7 @@ SphereLight {
 	P 50 50 50
 	Radius 50
 	Shader "mtl_light01"
-    Samples 3
+    Samples 1
 }
 
 #DiskLight {
@@ -104,7 +114,8 @@ ShaderStd {
 	 DiffuseColour rgb 0.1 0.1 0.1
 	 IOR float 1.2
 	 Spec1Colour rgb 0.8 0.8 0.8
-	
+	 DiffuseStrength float 0.5
+	 Spec1Strength float 0.5
 	
 }
 
